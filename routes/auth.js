@@ -43,10 +43,6 @@ router.post('/login', async (req, res) => {
 router.get('/setup-2fa', isAuthenticated, async (req, res) => {
     try {
         const user = await User.findOne({ username: req.session.username });
-        
-        if (!user) {
-            return res.redirect('/login');
-        }
 
         if (user.twoFactorEnabled) {
             return res.redirect('/home');
